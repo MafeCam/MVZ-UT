@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #e3f2fd; /* fondo azul claro */
+  background-color: #e3f2fd;
   color: #003366;
   text-align: center;
   margin: 0;
@@ -48,8 +48,8 @@ h1 {
 }
 
 .ramo {
-  background-color: #2196f3; /* azul base para ramos no seleccionados */
-  border: 2px solid #0d47a1;
+  background-color: #64b5f6; /* azul claro para no vistos */
+  border: 2px solid #1976d2;
   padding: 0.4rem;
   border-radius: 10px;
   cursor: pointer;
@@ -59,12 +59,12 @@ h1 {
 }
 
 .ramo:hover {
-  background-color: #1976d2;
+  background-color: #42a5f5;
 }
 
 .ramo.aprobado {
-  background-color: #6a1b9a;  /* morado */
-  border-color: #4a0072;
+  background-color: #b39ddb; /* morado claro */
+  border-color: #9575cd;
   color: white;
 }
 
@@ -74,3 +74,17 @@ h1 {
   color: #666666;
   cursor: not-allowed;
 }
+"""
+
+# Sobrescribimos el archivo estilos.css
+with open("/mnt/data/malla-veterinaria/estilos.css", "w", encoding="utf-8") as f:
+    f.write(estilos_actualizado.strip())
+
+# Reempaquetamos el ZIP actualizado
+with zipfile.ZipFile("/mnt/data/malla-veterinaria.zip", 'w') as zipf:
+    zipf.write("/mnt/data/malla-veterinaria/index.html", arcname="malla-veterinaria/index.html")
+    zipf.write("/mnt/data/malla-veterinaria/estilos.css", arcname="malla-veterinaria/estilos.css")
+    zipf.write("/mnt/data/malla-veterinaria/script.js", arcname="malla-veterinaria/script.js")
+
+"/mnt/data/malla-veterinaria.zip"
+
