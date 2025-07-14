@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #eef6ff;
+  background-color: #e3f2fd; /* fondo azul claro */
   color: #003366;
   text-align: center;
   margin: 0;
@@ -48,21 +48,22 @@ h1 {
 }
 
 .ramo {
-  background-color: #cce4ff;
-  border: 2px solid #0077cc;
+  background-color: #2196f3; /* azul base para ramos no seleccionados */
+  border: 2px solid #0d47a1;
   padding: 0.4rem;
   border-radius: 10px;
   cursor: pointer;
   font-size: 0.85rem;
+  color: white;
   transition: 0.2s;
 }
 
 .ramo:hover {
-  background-color: #99ccff;
+  background-color: #1976d2;
 }
 
 .ramo.aprobado {
-  background-color: #6a1b9a;
+  background-color: #6a1b9a;  /* morado */
   border-color: #4a0072;
   color: white;
 }
