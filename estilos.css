@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #e3f2fd;
+  background-color: #e3f2fd; /* fondo azul clarito */
   color: #003366;
   text-align: center;
   margin: 0;
@@ -48,8 +48,8 @@ h1 {
 }
 
 .ramo {
-  background-color: #d1c4e9; /* morado claro para no vistos */
-  border: 2px solid #9575cd;
+  background-color: #9575cd; /* morado más oscuro para materias no vistas */
+  border: 2px solid #7e57c2;
   padding: 0.4rem;
   border-radius: 10px;
   cursor: pointer;
@@ -59,11 +59,11 @@ h1 {
 }
 
 .ramo:hover {
-  background-color: #b39ddb;
+  background-color: #7e57c2;
 }
 
 .ramo.aprobado {
-  background-color: #64b5f6; /* azul clarito para aprobados */
+  background-color: #64b5f6; /* azul clarito cuando se aprueba */
   border-color: #1976d2;
   color: white;
 }
