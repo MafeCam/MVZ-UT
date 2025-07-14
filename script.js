@@ -1,3 +1,81 @@
+const semestres = {
+  "1° Semestre": [
+    "Química orgánica",
+    "Principios de estadística aplicada a las ciencias pecuarias",
+    "Competencias comunicativas",
+    "Iniciación a las ciencias pecuarias",
+    "Biología celular",
+    "Inglés I"
+  ],
+  "2° Semestre": [
+    "Epistemología",
+    "Etología y bienestar animal",
+    "Ética y bioética",
+    "Antropología cultural",
+    "Biología molecular",
+    "Bioquímica",
+    "Biofísica",
+    "Inglés II"
+  ],
+  "3° Semestre": [
+    "Fisiología animal",
+    "Histología animal",
+    "Sociología rural",
+    "Anatomía animal",
+    "Economía agraria"
+  ],
+  "4° Semestre": [
+    "Suelos y recursos forrajeros",
+    "Patología general",
+    "Parasitología y enfermedades parasitarias",
+    "Microbiología veterinaria",
+    "Proyectos de investigación",
+    "Inmunología veterinaria"
+  ],
+  "5° Semestre": [
+    "Enfermedades infecciosas",
+    "Nutrición de monogástricos",
+    "Nutrición de rumiantes",
+    "Patología sistémica",
+    "Herencia, variación y mejoramiento genético animal",
+    "Constitución política"
+  ],
+  "6° Semestre": [
+    "Medicina veterinaria preventiva y epidemiología",
+    "Farmacología y terapéutica veterinaria",
+    "Patología clínica",
+    "Semiología",
+    "Desarrollo rural",
+    "Sistemas de producción"
+  ],
+  "7° Semestre": [
+    "Reproducción animal",
+    "Cirugía veterinaria",
+    "Salud pública veterinaria",
+    "Medicina interna",
+    "Toxicología médica y de la reproducción",
+    "Administración y gerencia de empresas pecuarias"
+  ],
+  "8° Semestre": [
+    "Formulación y evaluación de proyectos",
+    "Clínica de grandes animales",
+    "Clínica de pequeños animales"
+  ],
+  "9° Semestre": [
+    "Producción y salud de ovinos y caprinos",
+    "Producción y salud avícola",
+    "Producción y salud de equinos",
+    "Producción y salud de porcinos",
+    "Producción y salud bovina",
+    "Tecnología de alimentos",
+    "Industrias pecuarias"
+  ],
+  "10° Semestre": [
+    "Pasantía",
+    "Opción de grado"
+  ]
+};
+
 const ramos = {
   "Química orgánica": [],
   "Principios de estadística aplicada a las ciencias pecuarias": [],
@@ -28,7 +106,12 @@ const ramos = {
   "Proyectos de investigación": ["Epistemología"],
   "Inmunología veterinaria": ["Biología celular"],
 
-  "Enfermedades infecciosas": ["Parasitología y enfermedades parasitarias", "Microbiología veterinaria", "Inmunología veterinaria", "Patología general", "Fisiología animal", "Anatomía animal"],
+  "Enfermedades infecciosas": [
+    "Parasitología y enfermedades parasitarias",
+    "Microbiología veterinaria",
+    "Inmunología veterinaria",
+    "Patología general"
+  ],
   "Nutrición de monogástricos": ["Bioquímica"],
   "Nutrición de rumiantes": ["Suelos y recursos forrajeros"],
   "Patología sistémica": ["Patología general"],
@@ -45,11 +128,22 @@ const ramos = {
   "Reproducción animal": ["Enfermedades infecciosas"],
   "Cirugía veterinaria": ["Semiología", "Farmacología y terapéutica veterinaria"],
   "Salud pública veterinaria": ["Medicina veterinaria preventiva y epidemiología"],
-  "Medicina interna": ["Farmacología y terapéutica veterinaria", "Semiología", "Medicina veterinaria preventiva y epidemiología"],
+  "Medicina interna": [
+    "Farmacología y terapéutica veterinaria",
+    "Semiología",
+    "Medicina veterinaria preventiva y epidemiología"
+  ],
   "Toxicología médica y de la reproducción": ["Farmacología y terapéutica veterinaria"],
   "Administración y gerencia de empresas pecuarias": [],
 
-  "Formulación y evaluación de proyectos": ["Reproducción animal", "Cirugía veterinaria", "Salud pública veterinaria", "Medicina interna", "Toxicología médica y de la reproducción", "Administración y gerencia de empresas pecuarias"],
+  "Formulación y evaluación de proyectos": [
+    "Reproducción animal",
+    "Cirugía veterinaria",
+    "Salud pública veterinaria",
+    "Medicina interna",
+    "Toxicología médica y de la reproducción",
+    "Administración y gerencia de empresas pecuarias"
+  ],
   "Clínica de grandes animales": ["Reproducción animal", "Cirugía veterinaria", "Medicina interna"],
   "Clínica de pequeños animales": ["Reproducción animal", "Cirugía veterinaria", "Medicina interna"],
 
@@ -66,30 +160,44 @@ const ramos = {
 };
 
 const aprobado = new Set();
-const contenedor = document.getElementById("malla");
+const malla = document.getElementById("malla");
 
 function crearMalla() {
-  contenedor.innerHTML = "";
-  Object.keys(ramos).forEach(nombre => {
-    const div = document.createElement("div");
-    div.classList.add("ramo");
+  malla.innerHTML = "";
+  for (const [semestre, ramosSemestre] of Object.entries(semestres)) {
+    const divSemestre = document.createElement("div");
+    divSemestre.classList.add("semestre");
 
-    const requisitos = ramos[nombre];
-    const desbloqueado = requisitos.every(r => aprobado.has(r));
+    const h2 = document.createElement("h2");
+    h2.textContent = semestre;
+    divSemestre.appendChild(h2);
 
-    if (!desbloqueado) div.classList.add("bloqueado");
-    if (aprobado.has(nombre)) div.classList.add("aprobado");
+    const contenedor = document.createElement("div");
+    contenedor.classList.add("grid-container");
 
-    div.innerText = nombre;
-    div.onclick = () => {
-      if (!desbloqueado) return;
-      aprobado.add(nombre);
-      crearMalla();
-    };
+    for (const ramo of ramosSemestre) {
+      const div = document.createElement("div");
+      div.classList.add("ramo");
 
-    contenedor.appendChild(div);
-  });
+      const requisitos = ramos[ramo] || [];
+      const desbloqueado = requisitos.every(r => aprobado.has(r));
+
+      if (!desbloqueado) div.classList.add("bloqueado");
+      if (aprobado.has(ramo)) div.classList.add("aprobado");
+
+      div.innerText = ramo;
+      div.onclick = () => {
+        if (!desbloqueado) return;
+        aprobado.add(ramo);
+        crearMalla();
+      };
+
+      contenedor.appendChild(div);
+    }
+
+    divSemestre.appendChild(contenedor);
+    malla.appendChild(divSemestre);
+  }
 }
 
 crearMalla();
-
