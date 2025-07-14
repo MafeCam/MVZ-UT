@@ -14,11 +14,23 @@ h1 {
   margin-bottom: 1rem;
 }
 
+.semestre {
+  margin: 1rem auto;
+  padding: 1rem;
+  border-top: 3px solid #0077cc;
+  width: 95%;
+}
+
+.semestre h2 {
+  text-align: left;
+  color: #005599;
+}
+
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .ramo {
@@ -47,4 +59,3 @@ h1 {
   color: #666666;
   cursor: not-allowed;
 }
-
